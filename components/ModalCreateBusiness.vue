@@ -153,10 +153,10 @@
 import axios from 'axios'
 // import slugify from 'slugify'
 
-const axiosBackendBaseUrl = process.env.VUE_APP_DYNAMO_BASE_URL
+const axiosBaseUrl = process.env.axiosBaseUrl
 const axiosOptions = {
   headers: {
-    'x-api-key': process.env.VUE_APP_DYNAMO_API_KEY,
+    'x-api-key': process.env.awsApiKey,
     'Content-Type': 'application/json;charset=UTF-8'
   }
 }
@@ -189,8 +189,7 @@ export default {
   mounted() {},
   methods: {
     async createBusiness() {
-      const axiosUrl = `${axiosBackendBaseUrl}/business`
-      console.log(`axiosUrl: ${axiosUrl}`)
+      const axiosUrl = `${axiosBaseUrl}/business`
       const axiosPayload = {
         brand_name: toTitleCase(this.businessName),
         website: `https://${this.businessWebsite}`,

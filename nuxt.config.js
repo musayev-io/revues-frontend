@@ -1,5 +1,11 @@
+require('dotenv').config()
+
 export default {
   mode: 'universal',
+  env: {
+    axiosBaseUrl: process.env.VUE_APP_DYNAMO_BASE_URL,
+    awsApiKey: process.env.VUE_APP_DYNAMO_API_KEY
+  },
   /*
    ** Headers of the page
    */
