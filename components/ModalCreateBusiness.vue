@@ -139,7 +139,7 @@
           <button
             type="button"
             class="inline-flex justify-center w-full rounded-md border border-transparent mt-4 px-5 py-2 bg-indigo-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition ease-in-out duration-150 sm:text-sm sm:leading-5"
-            @click.prevent="createBusiness"
+            @click.prevent="createBrand"
           >
             Let's Go!
           </button>
@@ -153,10 +153,10 @@
 import axios from 'axios'
 // import slugify from 'slugify'
 
-const axiosBaseUrl = process.env.axiosBaseUrl
+const AWS_BASE_URL = process.env.AWS_BASE_URL
 const axiosOptions = {
   headers: {
-    'x-api-key': process.env.awsApiKey,
+    'x-api-key': process.env.AWS_API_KEY,
     'Content-Type': 'application/json;charset=UTF-8'
   }
 }
@@ -188,8 +188,21 @@ export default {
   },
   mounted() {},
   methods: {
+    createBrand() {
+      const payload = {
+        brand_name: toTitleCase(this.businessName),
+        website: `https://${this.businessWebsite}`,
+        phone_number: this.businessPhoneNumber,
+        street_address: this.businessStreetAddress,
+        city: toTitleCase(this.businessCity),
+        state: this.businessState.toUpperCase(),
+        postal_code: this.businessPostalCode,
+        subscription: this.businessSubscription.toUpperCase()
+      }
+      this.$store.dispatch('createBrand', payload)
+    },
     async createBusiness() {
-      const axiosUrl = `${axiosBaseUrl}/business`
+      const axiosUrl = `${AWS_BASE_URL}/business`
       const axiosPayload = {
         brand_name: toTitleCase(this.businessName),
         website: `https://${this.businessWebsite}`,
