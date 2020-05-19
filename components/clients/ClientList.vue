@@ -99,12 +99,14 @@
 </template>
 
 <script>
-// import { mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'ClientList',
   computed: {
-    // ...mapGetters(['clients', 'totalClients'])
+    ...mapGetters({
+      clients: 'getClients'
+    })
   }
 }
 </script>
