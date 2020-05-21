@@ -1,5 +1,6 @@
 <template>
   <div
+    v-if!="isHidden"
     class="fixed bottom-0 inset-x-0 px-4 pb-6 sm:inset-0 sm:p-0 sm:flex sm:items-center sm:justify-center"
   >
     <!--
@@ -27,20 +28,23 @@
       To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
   -->
     <div
-      class="bg-white rounded-lg px-4 pt-5 pb-4 overflow-hidden shadow-xl transform transition-all sm:max-w-2xl sm:w-full sm:p-6"
+      class="bg-white rounded-lg px-4 pt-5 pb-4 overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full sm:p-6"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-headline"
     >
       <form>
         <div class="px-4 py-5 bg-white sm:p-6">
           <div class="grid grid-cols-6 gap-6">
             <div class="col-span-6 sm:col-span-6">
               <label
-                for="business_name"
+                for="first_name"
                 class="block text-sm font-medium leading-5 text-gray-700"
-                >Business Name</label
+                >First Name</label
               >
               <input
-                id="business_name"
-                v-model="businessName"
+                id="first_name"
+                v-model="first_name"
                 class="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
               />
             </div>
@@ -134,14 +138,26 @@
           </div>
         </div>
       </form>
-      <div class="mt-2 sm:mt-2 mx-6 mb-4">
-        <span class="flex w-full rounded-md shadow-sm">
+      <div
+        class="mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense"
+      >
+        <span class="flex w-full rounded-md shadow-sm sm:col-start-2">
           <button
             type="button"
-            class="inline-flex justify-center w-full rounded-md border border-transparent mt-4 px-5 py-2 bg-indigo-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition ease-in-out duration-150 sm:text-sm sm:leading-5"
-            @click.prevent="createBrand"
+            class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-indigo-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition ease-in-out duration-150 sm:text-sm sm:leading-5"
           >
-            Let's Go!
+            Create Client
+          </button>
+        </span>
+        <span
+          class="mt-3 flex w-full rounded-md shadow-sm sm:mt-0 sm:col-start-1"
+        >
+          <button
+            type="button"
+            class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-base leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5"
+            @click.prevent="cancelForm"
+          >
+            Cancel
           </button>
         </span>
       </div>
@@ -150,46 +166,20 @@
 </template>
 
 <script>
-// import slugify from 'slugify'
-const toTitleCase = (phrase) => {
-  return phrase
-    .toLowerCase()
-    .split(' ')
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ')
-}
-
 export default {
-  name: 'CreateBusinessModal',
+  name: 'CreateClientModal',
   data() {
     return {
-      businessName: null,
-      businessWebsite: null,
-      businessPhoneNumber: null,
-      businessStreetAddress: null,
-      businessCity: null,
-      businessState: null,
-      businessPostalCode: null,
-      businessSubscription: 'FREE',
-      userFirstName: null,
-      userLastName: null,
-      userEmail: null
+      isHidden: false,
+      first_name: ''
     }
   },
-  mounted() {},
   methods: {
-    createBrand() {
-      const payload = {
-        brand_name: toTitleCase(this.businessName),
-        website: `https://${this.businessWebsite}`,
-        phone_number: this.businessPhoneNumber,
-        street_address: this.businessStreetAddress,
-        city: toTitleCase(this.businessCity),
-        state: this.businessState.toUpperCase(),
-        postal_code: this.businessPostalCode,
-        subscription: this.businessSubscription.toUpperCase()
-      }
-      this.$store.dispatch('brands/createBrand', payload)
+    cancelForm() {
+      this.$emit('cancel-form')
+    },
+    submitForm() {
+      this.$emit('submit-form')
     }
   }
 }

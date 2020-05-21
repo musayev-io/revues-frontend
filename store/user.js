@@ -1,6 +1,18 @@
 import UserService from '~/services/UserService'
 
-export default {
+export const state = () => ({
+  user: {}
+})
+
+export const getters = {
+  getUser: (state) => state.user
+}
+
+export const mutations = {
+  LOAD_USER: (state, payload) => (state.user = payload)
+}
+
+export const actions = {
   createUser({ commit }, payload) {
     UserService.createUser(payload).then((response) => {
       // console.log(response.data)
