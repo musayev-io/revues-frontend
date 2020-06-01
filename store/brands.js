@@ -17,7 +17,7 @@ export const actions = {
   createBrand({ commit }, payload) {
     BrandService.createBrand(payload).then((response) => {
       commit('LOAD_BRAND', response.data)
-      console.log(JSON.stringify(response.data))
+      // console.log(JSON.stringify(response.data))
       this.$router.push({ name: 'brands' })
       // console.log(`Brand Store: ${this.$store.state.Brand.Brand}`)
       // push router to dashboard
@@ -25,7 +25,7 @@ export const actions = {
   },
   getBrand({ commit }, payload) {
     BrandService.createBrand(payload).then((response) => {
-      console.log(response.data)
+      // console.log(response.data)
       commit('LOAD_BRAND', response.data)
       // push router to dashboard
     })
