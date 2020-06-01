@@ -4,9 +4,7 @@ export default {
   createBrand({ commit }, payload) {
     BrandsService.createBrand(payload).then((response) => {
       commit('LOAD_BRAND', response.data)
-      console.log(JSON.stringify(response.data))
-      console.log(`store: ${this.$store.brands.state.brand}`)
-      console.log('wtf')
+      // console.log(JSON.stringify(response.data))
       this.$router.push({ name: 'brands' })
       // console.log(`Brand Store: ${this.$store.state.Brand.Brand}`)
       // push router to dashboard
@@ -14,7 +12,7 @@ export default {
   },
   getBrand({ commit }, payload) {
     BrandsService.createBrand(payload).then((response) => {
-      console.log(response.data)
+      // console.log(response.data)
       commit('LOAD_BRAND', response.data)
       // push router to dashboard
     })

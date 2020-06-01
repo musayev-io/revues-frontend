@@ -1,15 +1,15 @@
 <template>
   <div>
     <ReviewStatistics />
-    <div v-if="showingModalCreateBusiness">
-      <ModalCreateBusiness />
+    <div v-if="showingCreateBusinessModal">
+      <CreateBusinessModal />
     </div>
   </div>
 </template>
 
 <script>
 // import AppNavBar from '@/components/layout/AppNavBar'
-import ModalCreateBusiness from '~/components/ModalCreateBusiness'
+import CreateBusinessModal from '~/components/CreateBusinessModal'
 import ReviewStatistics from '~/components/ReviewStatistics'
 
 // import axios from 'axios'
@@ -19,11 +19,11 @@ export default {
   layout: 'AppNavBar',
   components: {
     ReviewStatistics,
-    ModalCreateBusiness
+    CreateBusinessModal
   },
   data() {
     return {
-      showingModalCreateBusiness: true
+      showingCreateBusinessModal: true
     }
   },
   // Generate Access Token for production - https://auth0.com/docs/api/management/v2/get-access-tokens-for-production

@@ -15,7 +15,8 @@
     "@nuxtjs/axios": "^5.3.6",
     "@tailwindcss/ui": "^0.3.0",
     "dotenv": "^8.2.0",
-    "nuxt": "^2.0.0"
+    "nuxt": "^2.0.0",
+    "vuex-persistedstate": "^3.0.1"
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^1.0.0",
